@@ -55,11 +55,50 @@ with a line break
 
 - gql is a tag template literal used to wrap graphql strings
 
-## The Query type
+### The Query type
 
 - is an approximate to route/handler in Rest API's
 
 - The fields of this type are entry points into the rest of our schema. These are the top-level fields that our client can query for.
+
+## Apollo Server
+
+- should recieve an incoming GraphQL query from our client
+- Validate that query against our schema
+- Populate the queried schema fields with mocked data
+- Return the populated fields as a response
+
+in index.js:
+
+```
+const {ApolloServer} = require('apollo-server');
+const typeDefs = require('./schema');
+
+const server = new ApolloServer({typeDefs});
+
+server.listen().then(() => {
+  console.log(`
+    🚀  Server is running!
+    🔉  Listening on port 4000
+    📭  Query at https://studio.apollographql.com/dev
+  `);
+});
+
+
+```
+
+- server up and running but is not connected to any data sources yet
+
+### Mocked data
+
+- to enable basic mocked data, we could provide mocks:true to the ApolloServer constructor, like so:
+
+```
+const server = new ApolloServer({
+  typeDefs,
+  mocks: true
+});
+```
 
 ### How to use this repo
 
