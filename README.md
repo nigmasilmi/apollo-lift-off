@@ -55,6 +55,12 @@ with a line break
 
 - gql is a tag template literal used to wrap graphql strings
 
+## The Query type
+
+- is an approximate to route/handler in Rest API's
+
+- The fields of this type are entry points into the rest of our schema. These are the top-level fields that our client can query for.
+
 ### How to use this repo
 
 The course will walk you step by step on how to implement the features you see in the demo app. This codebase is the starting point of your journey!
