@@ -100,6 +100,14 @@ const server = new ApolloServer({
 });
 ```
 
+- This instructs Apollo Server to populate every queried schema field with a placeholder value (such as Hello World for String fields).
+
+- To serve mocked data that's closer to reality, we'll pass an object to the mocks property instead of just true.
+
+## Apollo Studio Explorer
+
+- https://studio.apollographql.com/dev
+
 ### How to use this repo
 
 The course will walk you step by step on how to implement the features you see in the demo app. This codebase is the starting point of your journey!

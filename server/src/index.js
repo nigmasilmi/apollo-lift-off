@@ -1,10 +1,36 @@
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
 
-const mocks = {
+const mocks2 = {
   SpaceCat: () => ({
     id: () => "spacecat_01",
     title: () => "spacecat pioneer",
+  }),
+};
+
+const mocks = {
+  Query: () => ({
+    tracksForHome: () => [...new Array(6)],
+    spaceCats: () => [...new Array(3)],
+  }),
+  Track: () => ({
+    id: () => "track_01",
+    title: () => "Astro Kitty, Space Explorer",
+    author: () => {
+      return {
+        name: "Grumpy Cat",
+        photo:
+          "https://res.cloudinary.com/dety84pbu/image/upload/v1606816219/kitty-veyron-sm_mctf3c.jpg",
+      };
+    },
+    thumbnail: () =>
+      "https://res.cloudinary.com/dety84pbu/image/upload/v1598465568/nebula_cat_djkt9r.jpg",
+    length: () => 1210,
+    modulesCount: () => 6,
+  }),
+  SpaceCat: () => ({
+    id: () => "spacecat_01",
+    name: () => "spacecat pioneer",
   }),
 };
 
