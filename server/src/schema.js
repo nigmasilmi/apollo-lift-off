@@ -5,6 +5,7 @@ const typeDefs = gql`
     spaceCats: [SpaceCat]
     "Query to get tracks array for the homepage grid"
     tracksForHome: [Track!]!
+    tracksForHomeFetch: [Track!]!
   }
 
   type SpaceCat {
