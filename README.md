@@ -279,3 +279,34 @@ const resolvers = {
 ```
 
 - We'll get this value from the parent argument passed to the resolver. The parent argument contains data returned by our tracksForHome resolver, and because tracksForHome returns a list, Apollo Server iterates through that list and calls the author resolver once for each track. It passes the current track as the value of parent, enabling us to extract the authorId.
+
+## Wiring up resolvers and data sources
+
+- import resolvers in the Apollo server entry point
+- add as option in the constructor
+
+```
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
+});
+
+```
+
+- import the TrackAPI class ( the data source needed)
+- add dataSources as a function inside the constructor options, return the instance of the data source
+
+```
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => {
+    return {
+      trackAPI: new TrackAPI()
+    };
+  }
+});
+
+```
+
+- the dataSources key allows to access the RestDataSource API available to all resolvers from their context parameter
