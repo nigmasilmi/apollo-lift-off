@@ -144,3 +144,26 @@ ReactDOM.render(
 );
 
 ```
+
+## Querying from a component
+
+```
+import {gql} from '@apollo/client';
+
+/** TRACKS query to retrieve all tracks */
+export const TRACKS = gql`
+  query getTracks {
+    tracksForHome {
+      id
+      title
+      thumbnail
+      length
+      modulesCount
+      author {
+        name
+        photo
+      }
+    }
+  }
+`;
+```
