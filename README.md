@@ -311,4 +311,13 @@ const server = new ApolloServer({
 
 - the dataSources key allows to access the RestDataSource API available to all resolvers from their context parameter
 
+# Lift-off II#: Arguments
+
 [Lift-off III: Arguments](https://www.apollographql.com/tutorials/lift-off-part3)
+
+## GraphQL arguments
+
+- value provided for a specific field in a query
+- the schema must define these arguments and types when needed
+- the resolvers can use those arguments to retrieve specific objects, filter in a set or transform field's returned value
+- To define an argument for a field in our schema, we add parentheses after the field name. Inside, we write the name of the argument followed by a colon, then the type of that argument, like String or Int. If we have more than one argument, we can separate them with commas.

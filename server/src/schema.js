@@ -3,9 +3,15 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   type Query {
     spaceCats: [SpaceCat]
+
     "Query to get tracks array for the homepage grid"
     tracksForHome: [Track!]!
+
+    "Esperiment Query to get tracks with fetch"
     tracksForHomeFetch: [Track!]!
+
+    "Fetch a specific track, provided a track's ID"
+    track(id: ID!): Track
   }
 
   type SpaceCat {
@@ -38,12 +44,31 @@ const typeDefs = gql`
 
     "Track's number of modules"
     modulesCount: Int
+
+    "Complete description, can be in Markdown form"
+    description: String
+
+    "number of times a track has been viewed"
+    numberOfViews: Int
+
+    "full list of modules belonging to this track"
+    modules: [Module!]!
   }
 
   type Author {
     id: ID!
     name: String!
     photo: String
+  }
+
+  type Module {
+    id: ID!
+
+    "module's title"
+    title: String!
+
+    "length in minutes"
+    length: Int
   }
 `;
 
