@@ -108,31 +108,39 @@ const server = new ApolloServer({
 
 - https://studio.apollographql.com/dev
 
-### How to use this repo
+# Apollo Client 3
 
-The course will walk you step by step on how to implement the features you see in the demo app. This codebase is the starting point of your journey!
+## initialization
 
-There are 2 main folders:
+- npm install apollo-client graph-ql
+- graphql provides the core logic for parsing GraphQL queries.
+- @apollo/client contains pretty much everything we need to build our client, including an in-memory cache, local state management, and error handling
 
-- `server`: The starting point of our GraphQL server.
-- `client`: The starting point of our React application.
+in index.js
 
-To get started:
+```
+import { ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+// The first is the uri option, which we use to specify the location of our GraphQL server.
+//  every instance of ApolloClient uses an in-memory cache. This enables it to store and reuse query results so it doesn't have to make as many network requests. This makes our app's user experience feel much snappier.
 
-1. Navigate to the `server` folder.
-1. Run `npm install`.
-1. Run `npm start`.
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache()
+});
 
-This will start the GraphQL API server.
+```
 
-In another Terminal window,
+## Provider
 
-1. Navigate to the `client` folder.
-1. Run `npm install`.
-1. Run `npm start`.
+- The ApolloProvider component uses React's Context API to make a configured Apollo Client instance available throughout a React component tree. To use it, we wrap our app's top-level components in the ApolloProvider component and pass it our client instance as a prop:
 
-This will open up `localhost:3000` in your web browser.
+```
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <GlobalStyles />
+    <Pages />
+  </ApolloProvider>,
+  document.getElementById('root')
+);
 
-## Getting Help
-
-For any issues or problems concerning the course content, please refer to the [Odyssey topic in our community forums](https://community.apollographql.com/tags/c/help/6/odyssey).
+```
