@@ -324,6 +324,33 @@ const server = new ApolloServer({
 
 ## To implement new added arguments
 
-1. update the schema
+1. update the schema (see commit ec61db6a)
 2. update data source
+
+```
+ getTrack(trackId) {
+    return this.get(`track/${trackId}`);
+  }
+```
+
 3. update the resolvers
+
+## Resolvers with arguments
+
+- the required arguments will come from the query itself
+- the schema must have defined those arguments in the specific query
+- we can access those arguments in the resolver's args parameter
+
+```
+ track: (_, { id }, { dataSources }) => {
+      return dataSources.trackAPI.getTrack(id);
+    },
+```
+
+## Resolver chains
+
+- There is a common pattern that needs to retrieve another data with pieces of information that comes from another query, most of the cases, from the parent query that is the preceding one of the more specific. Yes it is confusing, [Watch this video](https://www.apollographql.com/tutorials/lift-off-part3/resolver-chains)
+
+- And remember the first parameter in a resolver-- the parent? parent refers to the returned data of the preceding resolver function in the chain!
+
+* A resolver function populates the data for a field in the schema. The function has 4 parameters. The first, parent, contains the returned dta of the previous function in the resolver chain. The second, args, is an object that contains all the arguments provided to the field. We use the third parameter, context, to access data sources such as a database or REST API. Finally, the fourth parameter, info, contains informational propertioes about the operation state.

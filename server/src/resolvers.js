@@ -30,6 +30,9 @@ const resolvers = {
     //   const res = await fetch(`${baseUrl}/author/${authorId}`);
     //   return res.json();
     // },
+    modules: ({ id }, _, { dataSources }) => {
+      return dataSources.trackAPI.getTrackModules(id);
+    },
   },
 };
 
