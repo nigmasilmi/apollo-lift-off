@@ -321,3 +321,9 @@ const server = new ApolloServer({
 - the schema must define these arguments and types when needed
 - the resolvers can use those arguments to retrieve specific objects, filter in a set or transform field's returned value
 - To define an argument for a field in our schema, we add parentheses after the field name. Inside, we write the name of the argument followed by a colon, then the type of that argument, like String or Int. If we have more than one argument, we can separate them with commas.
+
+## To implement new added arguments
+
+1. update the schema
+2. update data source
+3. update the resolvers

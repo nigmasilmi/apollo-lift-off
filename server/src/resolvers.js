@@ -14,6 +14,10 @@ const resolvers = {
 
       return res.json();
     },
+    // get a single track by ID, for the track page
+    track: (_, { id }, { dataSources }) => {
+      return dataSources.trackAPI.getTrack(id);
+    },
   },
 
   Track: {
