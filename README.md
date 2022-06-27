@@ -193,7 +193,7 @@ const {loading, error, data} = useQuery(TRACKS);
 9. The data then is assembled into a JSON object
 10. The JSON object is attached to the response's body data and returns it to the client
 
-## Apollo RestDataSourc
+## Apollo RestDataSource
 
 - The interesta data is accessed through a REST API
 - GraphQL server can access that REST API
@@ -210,3 +210,41 @@ const {loading, error, data} = useQuery(TRACKS);
 - declare the class and export it
 - add constructor body
 - create method to retrieve tracks and other for getAuthor
+
+## Resolvers
+
+- Resolvers are functions
+- Have the same name as the field that it populates data for
+- Can fetch data from any data source
+- Transforms the data into the shape the client requires
+
+### implementing resolvers
+
+- create a file for them resolvers.js
+- create an object resolvers and export it
+- the resolvers object's keys will correspond to our schema types and fields
+- Add a Query property to the object
+- for the Query property value will be the resolver functions
+
+- e.g: tracksForHome field:
+
+```
+const resolvers = {
+  Query:{
+    tracksForHome: () =>{}
+  }
+}
+```
+
+### How does resolvers interact with the data source?
+
+- it receives the necessary data through parameters
+
+```
+tracksForHome: (parent, args, context, info) => {},
+```
+
+- parent: is the value of the resolver for this field's parent
+- args: is an object that contains all GraphQL arguments that were provided for the field by the GraphQL operation, example the id argument in the client query
+- context: object shared across all resolvers that are executing for a particular operation. The resolver needs this context argument to share state, like authentication information, a database connection, the data sources(in our case the RESTDataSource).
+- info: contains information about the operation's executionstate, including the field name, the path to the field from root, and more.
