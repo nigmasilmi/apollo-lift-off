@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 
 const resolvers = {
   Query: {
@@ -17,15 +17,15 @@ const resolvers = {
   },
 
   Track: {
-    // author: ({ authorId }, _, { dataSources }) => {
-    //   return dataSources.trackAPI.getAuthor(authorId);
-    // },
-    // using fetch instead of dataSources
-    author: async ({ authorId }, _, { dataSources }) => {
-      const baseUrl = "https://odyssey-lift-off-rest-api.herokuapp.com";
-      const res = await fetch(`${baseUrl}/author/${authorId}`);
-      return res.json();
+    author: ({ authorId }, _, { dataSources }) => {
+      return dataSources.trackAPI.getAuthor(authorId);
     },
+    // using fetch instead of dataSources
+    // author: async ({ authorId }, _, { dataSources }) => {
+    //   const baseUrl = "https://odyssey-lift-off-rest-api.herokuapp.com";
+    //   const res = await fetch(`${baseUrl}/author/${authorId}`);
+    //   return res.json();
+    // },
   },
 };
 
