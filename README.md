@@ -112,7 +112,7 @@ const server = new ApolloServer({
 
 ## initialization
 
-- npm install apollo-client graph-ql
+- npm install graphql @apollo/client
 - graphql provides the core logic for parsing GraphQL queries.
 - @apollo/client contains pretty much everything we need to build our client, including an in-memory cache, local state management, and error handling
 
