@@ -167,3 +167,46 @@ export const TRACKS = gql`
   }
 `;
 ```
+
+## useQuery
+
+- The useQuery React hook is the primary API for executing queries in an Apollo application. We run a query within a React component by calling useQuery and passing it our GraphQL query string.
+
+```
+const {loading, error, data} = useQuery(TRACKS);
+```
+
+# Lift-off II: Resolvers
+
+[Lift-off II: Resolvers](https://www.apollographql.com/tutorials/lift-off-part2)
+
+## The GraphQL request journey
+
+1. Client shapes the query as a string
+2. Client sends HTTP POST or GET request
+3. Server extracts the query string
+4. Server parses and transforms the string in a Abstract Syntax Tree (AST) Document
+5. Server validates the query against the type and fields in the schema
+6. If anything is off, the server throws an error and sends it right back to the app
+7. For each field in the query, the server invokes that fiel´s resolver function
+8. A resolver function populates the field with the correct data from the correct source, such as a database or a REST API
+9. The data then is assembled into a JSON object
+10. The JSON object is attached to the response's body data and returns it to the client
+
+## Apollo RestDataSourc
+
+- The interesta data is accessed through a REST API
+- GraphQL server can access that REST API
+- It could call the API directly using fetch, or we can use a handy helper class called a DataSource. This class takes care of a few challenges and limitations that come with the direct approach.
+- With an axios or node-fetch call, accessing the tracks and then the authors would result in a n+1 number of calls
+- To solve these problems, we need something specifically designed for GraphQL, that will efficiently handle resource caching and deduplication for our REST API calls.
+- And because it's a very common task to fetch data from REST when building a GraphQL API, Apollo provides a dedicated DataSource class for just that: the RESTDataSource.
+
+## implement RESTDataSource
+
+- npm install apollo-datasource-rest
+- create a folder datasources / track-api.js
+- const {RESTDataSource} = require('apollo-datasource-rest');
+- declare the class and export it
+- add constructor body
+- create method to retrieve tracks and other for getAuthor
