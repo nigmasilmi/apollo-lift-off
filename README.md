@@ -248,3 +248,34 @@ tracksForHome: (parent, args, context, info) => {},
 - args: is an object that contains all GraphQL arguments that were provided for the field by the GraphQL operation, example the id argument in the client query
 - context: object shared across all resolvers that are executing for a particular operation. The resolver needs this context argument to share state, like authentication information, a database connection, the data sources(in our case the RESTDataSource).
 - info: contains information about the operation's executionstate, including the field name, the path to the field from root, and more.
+
+### Using the context argument
+
+- We need the context, which is the third parameter, to access our data sources.
+- We don't need the first two parameters, so as a convention, we'll name them with underscores
+- For the context, we'll destructure it to access its child object dataSources. And we can omit the fourth parameter, info, as we won't use it.
+
+```
+const resolvers = {
+  Query: {
+    // get all tracks, will be used to populate the homepage grid of our web client
+    tracksForHome: (_, __, {dataSources}) => {}
+  }
+};
+```
+
+- From our dataSources object, we'll gain access to our and its getTracksforHome method
+- Add another resolver to track the author field, the name will be Track because it would be related to the track type
+
+```
+const resolvers = {
+  Query: {
+    // ...
+  },
+  Track: {
+    author: (parent, args, context, info) => {}
+  }
+};
+```
+
+- We'll get this value from the parent argument passed to the resolver. The parent argument contains data returned by our tracksForHome resolver, and because tracksForHome returns a list, Apollo Server iterates through that list and calls the author resolver once for each track. It passes the current track as the value of parent, enabling us to extract the authorId.
