@@ -7,7 +7,7 @@ const typeDefs = gql`
     "Query to get tracks array for the homepage grid"
     tracksForHome: [Track!]!
 
-    "Esperiment Query to get tracks with fetch"
+    "Experiment Query to get tracks with fetch"
     tracksForHomeFetch: [Track!]!
 
     "Fetch a specific track, provided a track's ID"
